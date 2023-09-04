@@ -14,21 +14,21 @@ import java.util.Date;
 @Component
 public class JwtService {
 
-    @Value("${spring.jwt.secret_key}")
-    private String SECRET_KEY;
+  @Value("${spring.jwt.secret_key}")
+  private String SECRET_KEY;
 
-    public String generateToken(UserDetails userDetails){
-        return JWT.create()
-                .withClaim("username",userDetails.getUsername())
-                .withIssuedAt(new Date())
-                .withExpiresAt(Date.from(ZonedDateTime.now().plusDays(1).toInstant()))
-                .sign(Algorithm.HMAC256(SECRET_KEY));
-    }
+  public String generateToken(UserDetails userDetails) {
+    return JWT.create()
+        .withClaim("username", userDetails.getUsername())
+        .withIssuedAt(new Date())
+        .withExpiresAt(Date.from(ZonedDateTime.now().plusDays(3).toInstant()))
+        .sign(Algorithm.HMAC256(SECRET_KEY));
+  }
 
-    public String validateToken(String token){//admin@gmail.com
-        JWTVerifier jwtVerifier = JWT.require(Algorithm.HMAC256(SECRET_KEY))
-                .build();
-        DecodedJWT decodedJWT = jwtVerifier.verify(token);
-        return decodedJWT.getClaim("username").asString();
-    }
+  public String validateToken(String token) {
+    JWTVerifier jwtVerifier = JWT.require(Algorithm.HMAC256(SECRET_KEY))
+        .build();
+    DecodedJWT decodedJWT = jwtVerifier.verify(token);
+    return decodedJWT.getClaim("username").asString();
+  }
 }

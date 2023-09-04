@@ -67,7 +67,6 @@ public class StudentServiceImpl implements StudentService {
                 .httpStatus(HttpStatus.OK)
                 .message(String.format("Student with id: %s successfully saved", student1.getId()))
                 .build();
-
     }
 
     @Override
@@ -82,6 +81,5 @@ public class StudentServiceImpl implements StudentService {
                 .httpStatus(HttpStatus.OK)
                 .message("Student with id: " + id + " is deleted!")
                 .build();
-
     }
 }

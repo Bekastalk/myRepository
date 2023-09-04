@@ -1,15 +1,15 @@
 package com.example.restjava10.service.serviceImpl;
 
+import com.example.restjava10.security.jwt.JwtService;
 import com.example.restjava10.dto.AuthenticationResponse;
 import com.example.restjava10.dto.SignInRequest;
 import com.example.restjava10.dto.SignUpRequest;
 import com.example.restjava10.entity.User;
 import com.example.restjava10.repository.UserRepository;
-import com.example.restjava10.security.jwt.JwtService;
 import com.example.restjava10.service.AuthenticationService;
 import jakarta.persistence.EntityExistsException;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
-import org.springframework.boot.autoconfigure.security.SecurityProperties;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -18,6 +18,7 @@ import java.util.NoSuchElementException;
 
 @Service
 @RequiredArgsConstructor
+@Transactional
 public class AuthenticationServiceImpl implements AuthenticationService {
 
     private final UserRepository userRepository;
@@ -26,12 +27,10 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 
     @Override
     public AuthenticationResponse signUp(SignUpRequest signUpRequest) {
-        System.out.println("test1");
         if (userRepository.existsByEmail(signUpRequest.email())) {
             throw new EntityExistsException(
                     "User with email: " + signUpRequest.email() + " already exists!");
         }
-        System.out.println("test2");
         User user = User.builder()
                 .firstName(signUpRequest.firstName())
                 .lastName(signUpRequest.lastName())
@@ -71,22 +70,4 @@ public class AuthenticationServiceImpl implements AuthenticationService {
                 .role(user.getRole())
                 .build();
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 }
