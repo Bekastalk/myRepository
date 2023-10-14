@@ -1,0 +1,15 @@
+server:
+    error:
+        include-message: always
+    port: 9090
+spring:
+    datasource:
+        password: postgres
+        url: jdbc:postgresql://localhost:5432/java10
+        username: postgres
+    jpa:
+        hibernate:
+            ddl-auto: update
+        show-sql: true
+    jwt:
+        secret_key: java-10
