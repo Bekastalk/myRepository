@@ -1,10 +1,10 @@
 server:
     error:
         include-message: always
-    port: 9090
+    port: 8080
 spring:
     datasource:
-        password: postgres
+        password: 12345
         url: jdbc:postgresql://localhost:5432/java10
         username: postgres
     jpa:

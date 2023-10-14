@@ -1,5 +1,6 @@
 package com.example.restjava10.security;
 
+import com.example.restjava10.exception.NotFoundException;
 import com.example.restjava10.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
@@ -11,7 +12,6 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-import java.util.NoSuchElementException;
 
 @EnableWebSecurity
 @Configuration
@@ -22,7 +22,7 @@ public class ApplicationConfig {
   @Bean
   public UserDetailsService userDetailsService() {
     return email -> userRepository.getUserByEmail(email)
-            .orElseThrow(() -> new NoSuchElementException(
+            .orElseThrow(() -> new NotFoundException(
           String.format("User with email:%s is not found...",email)));
   }
   @Bean

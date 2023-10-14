@@ -1,9 +1,6 @@
 package com.example.restjava10.service;
 
-import com.example.restjava10.dto.SimpleResponse;
-import com.example.restjava10.dto.StudentRequest;
-import com.example.restjava10.dto.StudentRequestRecord;
-import com.example.restjava10.dto.StudentResponse;
+import com.example.restjava10.dto.*;
 import com.example.restjava10.entity.Student;
 
 import java.util.List;
@@ -21,6 +18,5 @@ public interface StudentService {
     SimpleResponse deleteStudent(Long id);
 
 
-
-
+    PaginationRequest getAllByPagination(int currentPage, int pageSize);
 }

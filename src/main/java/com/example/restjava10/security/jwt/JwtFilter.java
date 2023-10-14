@@ -38,6 +38,7 @@ public class JwtFilter extends OncePerRequestFilter {
           User user = userRepository.getUserByEmail(userName).orElseThrow(
               () -> new NoSuchElementException(
                   String.format("User with email:%s does not exist", userName)));
+
           SecurityContextHolder.getContext()
               .setAuthentication(
                   new UsernamePasswordAuthenticationToken(

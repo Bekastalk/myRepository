@@ -1,9 +1,6 @@
 package com.example.restjava10.api;
 
-import com.example.restjava10.dto.SimpleResponse;
-import com.example.restjava10.dto.StudentRequest;
-import com.example.restjava10.dto.StudentRequestRecord;
-import com.example.restjava10.dto.StudentResponse;
+import com.example.restjava10.dto.*;
 import com.example.restjava10.service.StudentService;
 import jakarta.annotation.security.PermitAll;
 import lombok.RequiredArgsConstructor;
@@ -49,4 +46,9 @@ public class StudentApi {
         return studentService.deleteStudent(studentId);
     }
 
+    @GetMapping("/pagination")
+    public PaginationRequest pagination(@RequestParam int currentPage,
+                                        @RequestParam int pageSize){
+       return studentService.getAllByPagination(currentPage, pageSize);
+    }
 }
